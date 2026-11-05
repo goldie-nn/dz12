@@ -13,12 +13,5 @@ FROM tomcat:8.5-jdk8-openjdk
 RUN rm -rf /usr/local/tomcat/webapps/*
 COPY --from=build /opt/target/*.war /usr/local/tomcat/webapps/ROOT.war
 
-RUN mkdir -p /usr/local/tomcat/webapps/ROOT && \
-    unzip -q /usr/local/tomcat/webapps/ROOT.war -D /usr/local/tomcat/webapps/ROOT/
-
-RUN mkdir -p /usr/local/tomcat/ROOT && \
-    cp /usr/local/tomcat/webapps/ROOT/Config.properties /usr/local/tomcat/ROOT/Config.properties
-
-
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
