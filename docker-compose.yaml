@@ -25,5 +25,7 @@ services:
       mkdir -p /usr/local/tomcat/ROOT &&
       cp /usr/local/tomcat/webapps/ROOT/Config.properties /usr/local/tomcat/ROOT/Config.properties 2>/dev/null || true;
       catalina.sh run
+      "
+
 volumes:
   mysql_data:
