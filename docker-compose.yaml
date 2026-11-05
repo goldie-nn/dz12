@@ -20,12 +20,8 @@ services:
     restart: unless-stopped
     ports:
       - "8080:8080"
-    entrypoint: >
-      /bin/sh -c "
-      mkdir -p /usr/local/tomcat/ROOT &&
-      cp /usr/local/tomcat/webapps/ROOT/Config.properties /usr/local/tomcat/ROOT/Config.properties 2>/dev/null || true;
-      catalina.sh run
-      "
+    depends_on:
+      - db
 
 volumes:
   mysql_data:
