@@ -4,6 +4,7 @@ services:
   db:
     image: mysql:5.6
     container_name: mysql
+    restart: unless-stopped
     environment:
       MYSQL_DATABASE: database
       MYSQL_USER: userdb
@@ -16,8 +17,13 @@ services:
   web:
     build: .
     container_name: java_app
+    restart: unless-stopped
     ports:
       - "8080:8080"
-
+    entrypoint: >
+      /bin/sh -c "
+      mkdir -p /usr/local/tomcat/ROOT &&
+      cp /usr/local/tomcat/webapps/ROOT/Config.properties /usr/local/tomcat/ROOT/Config.properties 2>/dev/null || true;
+      catalina.sh run
 volumes:
   mysql_data:
