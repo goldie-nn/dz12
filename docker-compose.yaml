@@ -11,19 +11,14 @@ services:
       MYSQL_PASSWORD: userpassword
     ports:
       - "3306:3306"
-    networks:
-      - app_network
     volumes:
       - mysql_data:/var/lib/mysql
-
   web:
     build: .
     container_name: java_app
     restart: unless-stopped
     ports:
       - "8080:8080"
-    networks:
-      - app_network
     depends_on:
       - db
 
