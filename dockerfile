@@ -1,11 +1,13 @@
-FROM maven:3.2.5-jdk-6 AS build
+FROM maven:3.8-openjdk-11 AS build
 WORKDIR /opt
 
 COPY pom.xml .
 COPY src ./src
 COPY WebContent ./WebContent
 
-RUN mvn clean package -Dmaven.test.skip=true
+RUN mvn clean package -Dmaven.test.skip=true \
+    -Dmaven.compiler.source=1.6 \
+    -Dmaven.compiler.target=1.6
 
 FROM tomcat:6.0-jre6
 RUN rm -rf /usr/local/tomcat/webapps/*
