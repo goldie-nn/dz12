@@ -9,7 +9,7 @@ RUN mvn clean package -Dmaven.test.skip=true \
     -Dmaven.compiler.source=1.6 \
     -Dmaven.compiler.target=1.6
 
-FROM tomcat:6.0-jre6
+FROM tomcat:8.5-jdk8-openjdk
 RUN rm -rf /usr/local/tomcat/webapps/*
 COPY --from=build /opt/target/*.war /usr/local/tomcat/webapps/ROOT.war
 EXPOSE 8080
